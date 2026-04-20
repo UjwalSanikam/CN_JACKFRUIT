@@ -1,0 +1,18 @@
+Phase 1: The Basic Connection (Proof of Concept)
+Create a basic Server that binds to a port and listens.
+Create a Client that connects to the server.
+Have the server send a simple text message ("Hello Client") and ensure the client receives it.
+
+Phase 2: Single Client Streaming & Buffering
+Upgrade the server to open a .wav or .mp3 file.
+Implement a loop that reads a small chunk (e.g., 4096 bytes) and sends it over the TCP socket.
+Have the client receive those bytes and save them to a local file, or pipe them directly to an audio playback library (like PyAudio in Python).
+
+Phase 3: Multi-threading
+Modify the server so that the accept() loop passes the socket to a new thread.
+Test by opening two clients simultaneously and ensuring both receive the audio stream without blocking each other.
+
+Phase 4: Adaptive Streaming & QoS
+Create multiple versions of the same audio file (e.g., High Quality 320kbps, Low Quality 128kbps).
+Add a "control channel" (either multiplexed on the same TCP connection or via a secondary port) where the client sends its current buffer size back to the server every few seconds.
+Write logic: IF client buffer < 20%, switch file pointer to the 128kbps file.
